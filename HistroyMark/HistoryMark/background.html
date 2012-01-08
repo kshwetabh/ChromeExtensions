@@ -1,0 +1,62 @@
+<html>
+<head>
+	<script type="text/javascript">
+		function checkIfVisited (testUrl) {
+			chrome.history.search({
+                                    text: testUrl,
+                                    startTime : 0,
+                                    maxResults : 1,
+                                }, function(historyItems){
+                                    //console.log(historyItems);
+                                    //console.log(historyItems.length + "| searchURL:" + testUrl);
+                                    if (historyItems.length > 0) {
+                                        //console.log("Setting icon to red. ["+testUrl+"]. Already Visited");
+                                        chrome.browserAction.setIcon({path:"red.png"}); //Visited                                        
+                                    } else {
+                                        //console.log("Setting icon to green. ["+testUrl +"]. Not visited");
+                                        chrome.browserAction.setIcon({path:"green.png"}); //Not Visited                                        
+                                    }
+                                });
+		}
+
+		function decodeURLs (urls) {
+			if (urls) {
+				var	len = urls.length;
+				for (var index=0; index < len; index++){
+					urls[index] = decodeURIComponent(urls[index]);
+				}
+			}
+			return urls;
+		}
+
+		// Listen for any changes to the URL of any tab.
+		//chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+		    if(changeInfo.status == "loading") {
+		        checkIfVisited(tab.url);
+		    }
+		});
+
+		chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
+		    chrome.tabs.getSelected(null, function(tab){
+		        checkIfVisited(tab.url);
+		    });
+		});
+		/*function testLogic () {
+			checkIfVisited("http://google.com");
+			checkIfVisited("http://yahoo.com");
+			checkIfVisited("http://aol.com");
+			checkIfVisited("http://bank.com");
+			checkIfVisited("http://aol.com");
+			checkIfVisited("http://google.com");
+			checkIfVisited("http://yahoo.com");
+			checkIfVisited("http://rediff.com");
+			checkIfVisited("http://html5test.com");
+			checkIfVisited("http://devzone.com");
+		}*/
+		
+	</script>
+</head>
+<body></body>
+</html>

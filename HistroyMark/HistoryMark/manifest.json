@@ -1,0 +1,14 @@
+{
+  "name": "History Mark",
+  "description": "This extension adds a live indicator (icon) to the toolbar indicating if the current website is already visited or not",
+  "version": "1.0.1",
+  "background_page": "background.html",
+  "icons": { "128": "HistoryMark.png" },
+  "permissions": [
+    "tabs", "history", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "History Mark",
+    "default_icon": "HistoryMark.png"
+  }
+}

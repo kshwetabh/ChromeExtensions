@@ -1,0 +1,15 @@
+{
+  "name": "Post Me",
+  "description": "Use Post Me extension to send/share links and selected text through your default mail client (Thunderbird, outlook, etc ) or Gmail.",
+  "version": "1.0.1",
+  "background_page": "background.html",
+  "icons": { "128": "e_mail128x128.png" },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "Post Me",
+    "default_icon": "e_mail34x34.png"
+  }
+}
